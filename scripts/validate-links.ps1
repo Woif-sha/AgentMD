@@ -60,3 +60,55 @@ foreach ($entry in $expectedLinks) {
 
     Write-Host "Valid: $link -> $target"
 }
+
+$markdownFiles = Get-ChildItem -LiteralPath $RepositoryRoot -Filter '*.md' -File -Recurse
+$inlineLinkPattern = [regex]'!?(?:\[[^\]]*\])\((?:<(?<angle>[^>]+)>|(?<plain>[^\s\)]+))(?:\s+["''][^"'']*["''])?\)'
+$referenceLinkPattern = [regex]'^\s{0,3}\[[^\]]+\]:\s*(?:<(?<angle>[^>]+)>|(?<plain>\S+))'
+
+foreach ($markdownFile in $markdownFiles) {
+    $inFence = $false
+    $lineNumber = 0
+
+    foreach ($line in Get-Content -LiteralPath $markdownFile.FullName) {
+        $lineNumber++
+        if ($line -match '^\s*(```|~~~)') {
+            $inFence = -not $inFence
+            continue
+        }
+        if ($inFence) {
+            continue
+        }
+
+        $matches = @($inlineLinkPattern.Matches($line))
+        $referenceMatch = $referenceLinkPattern.Match($line)
+        if ($referenceMatch.Success) {
+            $matches += $referenceMatch
+        }
+
+        foreach ($match in $matches) {
+            $destination = if ($match.Groups['angle'].Success) {
+                $match.Groups['angle'].Value
+            } else {
+                $match.Groups['plain'].Value
+            }
+
+            if ($destination.StartsWith('#') -or $destination -match '^[a-z][a-z0-9+.-]*:') {
+                continue
+            }
+
+            $pathPart = ($destination -split '[?#]', 2)[0]
+            if ([string]::IsNullOrEmpty($pathPart)) {
+                continue
+            }
+
+            $decodedPath = [Uri]::UnescapeDataString($pathPart)
+            $resolvedPath = [System.IO.Path]::GetFullPath((Join-Path $markdownFile.DirectoryName $decodedPath))
+            if (-not (Test-Path -LiteralPath $resolvedPath)) {
+                $relativeSource = [System.IO.Path]::GetRelativePath($RepositoryRoot, $markdownFile.FullName)
+                throw "Broken Markdown link in ${relativeSource}:${lineNumber}: $destination"
+            }
+        }
+    }
+}
+
+Write-Host "Valid: local Markdown links in $($markdownFiles.Count) files"

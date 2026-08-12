@@ -31,10 +31,10 @@
 
 ## Conditional Rules
 
-- Before changing code, tests, configuration, build logic, or code-adjacent documentation, read [`rules/coding.md`](rules/coding.md).
-- Before adding validation, hardening, compatibility, migration machinery, checks, or edge-case handling, read [`rules/scope-discipline.md`](rules/scope-discipline.md).
-- Before delegating or running parallel agents, read [`rules/agent-execution.md`](rules/agent-execution.md).
-- Before changing tracked content or performing Git delivery, read [`rules/git-delivery.md`](rules/git-delivery.md).
+- Before changing code, tests, configuration, build logic, or code-adjacent documentation, read `~/.codex/rules/coding.md` in Codex or `~/.claude/rules/coding.md` in Claude Code.
+- Before adding validation, hardening, compatibility, migration machinery, checks, or edge-case handling, read `~/.codex/rules/scope-discipline.md` in Codex or `~/.claude/rules/scope-discipline.md` in Claude Code.
+- Before delegating or running parallel agents, read `~/.codex/rules/agent-execution.md` in Codex or `~/.claude/rules/agent-execution.md` in Claude Code.
+- Before changing tracked content or performing Git delivery, read `~/.codex/rules/git-delivery.md` in Codex or `~/.claude/rules/git-delivery.md` in Claude Code.
 
 ## Tool Boundary
 

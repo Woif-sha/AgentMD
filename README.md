@@ -29,7 +29,7 @@ Install or refresh the global links from PowerShell:
 .\scripts\install-links.ps1
 ```
 
-Existing global files are copied to `%USERPROFILE%\.agentmd-backups\<timestamp>` before replacement. Validate repository and global links with:
+Existing global files are copied to `%USERPROFILE%\.agentmd-backups\<timestamp>` before replacement. Validate repository symbolic links, global links, and local Markdown link targets with:
 
 ```powershell
 .\scripts\validate-links.ps1
