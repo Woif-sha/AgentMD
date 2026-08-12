@@ -1,5 +1,9 @@
 # Global Agent Rules
 
+## Language
+
+Default to Chinese in user-facing replies unless the user explicitly requests another language.
+
 ## 1. Think Before Coding
 
 - State assumptions. If uncertain, ask.
