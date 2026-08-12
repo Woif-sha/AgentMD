@@ -14,6 +14,17 @@ After every code, test, asset, configuration, or code-adjacent documentation cha
 
 Follow repository-specific branch and release conventions when present. After delivering work, leave the checkout on the repository's designated development branch when one exists.
 
+## GitHub App Permission Fallback
+
+When a GitHub App write operation such as PR creation or merge returns `403 Resource not accessible by integration`, stop retrying the App. Treat that response as an integration-token permission boundary, not evidence of a repository conflict, branch-protection failure, or broken local authentication.
+
+1. Run `gh auth status` and confirm the GitHub CLI is authenticated as the intended user with access to the repository and the scopes required for the operation.
+2. Follow the `github:yeet` CLI fallback and perform the blocked operation with `gh`, such as `gh pr create` or `gh pr merge`.
+3. Before merging, use `gh pr view` and the repository's required check commands to confirm the PR is mergeable and every required check has passed or no checks apply.
+4. After merging, verify the PR is `MERGED`, confirm any issue named by `Closes` was closed, and synchronize the local default branch with the remote.
+
+This fallback changes the authenticated client only. Preserve the repository's merge strategy and required checks; never force-push or bypass protections to compensate for App permissions.
+
 ## Version Releases
 
 Create a Git tag or GitHub Release only when the user explicitly requests a release or version publication; ordinary commits and pushes never imply a release.
