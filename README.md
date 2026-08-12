@@ -20,7 +20,8 @@ Always edit the appropriate `AGENTS.md`. The matching `CLAUDE.md` resolves to th
 | --- | --- |
 | `%USERPROFILE%\.codex\AGENTS.md` | `global/AGENTS.md` |
 | `%USERPROFILE%\.claude\CLAUDE.md` | `global/CLAUDE.md` |
-| `%USERPROFILE%\.codex\rules\git-delivery.md` | `global/rules/git-delivery.md` |
+| `%USERPROFILE%\.codex\rules\*.md` | `global/rules/*.md` |
+| `%USERPROFILE%\.claude\rules\*.md` | `global/rules/*.md` |
 
 Install or refresh the global links from PowerShell:
 

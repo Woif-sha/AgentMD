@@ -14,14 +14,20 @@ $links = @(
         Target = Join-Path $RepositoryRoot 'global\AGENTS.md'
     },
     @{
-        Link = Join-Path $UserProfilePath '.codex\rules\git-delivery.md'
-        Target = Join-Path $RepositoryRoot 'global\rules\git-delivery.md'
-    },
-    @{
         Link = Join-Path $UserProfilePath '.claude\CLAUDE.md'
         Target = Join-Path $RepositoryRoot 'global\CLAUDE.md'
     }
 )
+
+$ruleFiles = Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'global\rules') -Filter '*.md' -File
+foreach ($hostDirectory in @('.codex', '.claude')) {
+    foreach ($ruleFile in $ruleFiles) {
+        $links += @{
+            Link = Join-Path $UserProfilePath "$hostDirectory\rules\$($ruleFile.Name)"
+            Target = $ruleFile.FullName
+        }
+    }
+}
 
 foreach ($entry in $links) {
     $target = [System.IO.Path]::GetFullPath($entry.Target)

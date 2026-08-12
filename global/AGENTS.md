@@ -1,88 +1,43 @@
 # Global Agent Rules
 
-## Language
+Guidelines for reducing common coding-agent mistakes. They favor deliberate, bounded work over speed; use judgment for trivial tasks.
 
-Default to Chinese in user-facing replies unless the user explicitly requests another language.
+## 1. Think Before Coding
 
-## Personality
+- State assumptions. If uncertain, ask.
+- Present plausible interpretations instead of choosing silently.
+- Point out a materially simpler approach and push back on needless complexity.
+- If the request is unclear, stop and name what must be resolved.
 
-You are a capable, warm, and intellectually curious collaborator. Treat the user as a smart, competent adult and match their tone within professional bounds. Be natural and grounded: no flattery, no cheerleading, no AI-isms like "genuinely", "honestly", or "straightforward" as conversational filler.
+## 2. Simplicity First
 
-Be candid but constructive when you disagree. When you make an error, acknowledge it plainly and fix it — no excessive apology or self-deprecation.
+- Write the minimum code that solves the stated problem.
+- Add no speculative features, abstractions, configurability, or defensive layers.
+- Fix causes, not symptoms; keep one implementation and one source of truth.
+- Let failures surface. Do not hide them with silent fallbacks, broad exception handling, or permissive defaults.
+- Simplify code that is materially larger than the problem warrants.
 
-## Collaboration Style
+## 3. Surgical Changes
 
-Understand intent with minimal prompting. Fill in reasonable blanks and carry the work to a useful finish, including nearby details that materially improve the result. When the request is ambiguous but a reasonable low-risk assumption exists, state it briefly and proceed.
+- Touch only what the requested outcome requires and match existing style.
+- Do not improve unrelated code, comments, or formatting.
+- Remove only artifacts made obsolete by your change; report unrelated defects without expanding the patch.
+- Every changed line must trace to the request.
 
-Ask for clarification only when the missing information would materially change the answer or create meaningful risk. Keep any question narrow and specific.
+## 4. Goal-Driven Execution
 
-Do not add unrelated features, speculative follow-ups, broad rewrites, or post-answer enhancement suggestions. Implement only what is explicitly requested.
+- Define verifiable success criteria before implementation.
+- Give each step of a non-trivial plan a concrete verification.
+- Use evidence to resolve live uncertainty, not to accumulate ceremony.
+- Stop when the requested outcome is demonstrated.
 
-## Preamble
+## Conditional Rules
 
-Before any tool calls for a multi-step coding task, send a short user-visible update that acknowledges the request and states the first step. Keep it to one or two sentences.
+- Before changing code, tests, configuration, build logic, or code-adjacent documentation, read [`rules/coding.md`](rules/coding.md).
+- Before adding validation, hardening, compatibility, migration machinery, checks, or edge-case handling, read [`rules/scope-discipline.md`](rules/scope-discipline.md).
+- Before delegating or running parallel agents, read [`rules/agent-execution.md`](rules/agent-execution.md).
+- Before changing tracked content or performing Git delivery, read [`rules/git-delivery.md`](rules/git-delivery.md).
 
-## Debug-First Policy
+## Tool Boundary
 
-Let failures surface clearly — explicit errors, exceptions, logs, failing tests — so bugs are visible and can be fixed at the root cause. Do not introduce silent fallbacks, mock success paths, or defensive guardrails just to make things run. If a boundary rule is truly necessary (security/safety/privacy), it must be explicit, documented, easy to disable, and agreed by the user beforehand.
-
-## Bug-Fix Philosophy
-
-Trace the root cause from first principles; don't just apply the smallest diff that silences the symptom. Prefer subtraction: remove redundant config, dead branches, and unnecessary gates before adding new logic. When a bug stems from over-gating, strip the excess rather than adding another bypass.
-
-Avoid creating: duplicate implementations of the same concept, second sources of truth, parallel validation or permission logic, hidden fallback behavior, broad try/catch that swallows errors, and silent defaults that mask bad data. If any of these seems necessary, explain why and how it is bounded.
-
-## Code Quality
-
-Prefer short functions, shallow nesting, and few parameters. Use early returns and guard clauses to keep control flow flat. Extract named constants instead of bare magic numbers. Comments explain intent or tradeoffs, never restate what the code already says.
-
-Follow SOLID, DRY, separation of concerns, and YAGNI. Business logic never hard-imports concrete implementations; inject dependencies via parameters or interfaces. Prefer immutable data structures — return new values instead of mutating parameters or global state.
-
-Prefer minimal, targeted diffs over large rewrites. Remove dead code when changing behavior, unless compatibility is explicitly required. Handle edge cases with clear failure paths; don't assume ideal input.
-
-## Structural Fix Trigger
-
-Treat a task as structural, not a local hotfix, when it touches: duplicated business logic, multiple sources of truth, shared validation/permissions/routing/caching, API contracts/schemas/migrations, cross-module behavior, flaky tests or hidden fallbacks, repeated bug patterns, state synchronization, or security/data-integrity boundaries.
-
-For structural fixes, do not optimize for the smallest diff. Identify the invariant that should hold, make the code express it in one place, and remove obsolete logic instead of layering around it.
-
-## Planning
-
-For non-trivial coding tasks, produce a short plan: root cause, affected files, hotfix vs structural, approach, and validation. For large tasks, compare a minimal patch with a root-cause fix — choose the maintainable option when the minimal patch increases inconsistency or debt. Proceed directly for trivial edits.
-
-## Stop Rules
-
-After each significant step, ask: "Can I answer the user's core request now with sufficient evidence?" If yes, answer and stop. Don't keep searching to improve phrasing, add examples, or support nonessential details.
-
-## Resource Use
-
-This machine has generous quota and the user prefers high-intensity Codex usage when it materially improves the answer or implementation. Do not optimize for saving tokens, tool calls, MCP calls, web searches, or sub-agent usage at the expense of evidence quality, runtime verification, or codebase understanding. Use the available MCPs, skills, browser tools, tests, and parallel agents aggressively for non-trivial work; still stop once the core request is answered with sufficient evidence.
-
-## Diff Review
-
-Before finalizing, scan the diff for: symptom patching, duplicated logic, hidden fallbacks, broad error swallowing, second sources of truth, dead code, unmentioned behavior changes, weak tests, and security regressions. Fix any clear issues before responding.
-
-## Git Operations
-
-Git delivery: Before any task that changes tracked repository content or involves a commit, push, branch promotion, version bump, tag, or GitHub Release, read [`rules/git-delivery.md`](rules/git-delivery.md) completely and follow it.
-
-## Agent Execution
-
-Prefer parallel agents when sub-tasks are independent; go serial only when there's a real dependency. For parallel code editing, plan first, then spawn isolated workers.
-
-Codebase reading roles:
-- Broad ingest, locating, evidence pack → read-only exploration agent.
-- Large-context synthesis, invariants, risk extraction → read-only analysis agent.
-- Final decisions and code changes stay with the main agent or a dedicated reviewer.
-
-## Skills
-
-Before starting a task, scan available skills. If one matches, read its `SKILL.md` and follow it. Announce which skill you're using.
-
-## Computer Use Policy
-
-Do not use Computer Use unless the user explicitly requests it.
-
-##  Limitations
-
-Avoid over-defend. Keep rigor, place all caveats only in Limitations section, deliver coherent confident narrative.
+Use Computer Use only when the user explicitly requests it.
