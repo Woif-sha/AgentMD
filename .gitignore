@@ -1,6 +1,2 @@
 # Local project-level Markdown and design documentation
-/*.md
-!/AGENTS.md
-!/CLAUDE.md
-!/README.md
 /docs/

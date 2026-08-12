@@ -1,7 +1,5 @@
 # Global Agent Rules
 
-Guidelines for reducing common coding-agent mistakes. They favor deliberate, bounded work over speed; use judgment for trivial tasks.
-
 ## 1. Think Before Coding
 
 - State assumptions. If uncertain, ask.
