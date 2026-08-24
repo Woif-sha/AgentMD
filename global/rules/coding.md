@@ -17,10 +17,21 @@ Treat duplicated logic, multiple sources of truth, shared validation or permissi
 
 ## Code Shape
 
-- Prefer cohesive functions, shallow control flow, explicit names, and comments about intent or trade-offs.
+- Name symbols for domain intent, units, and state; use the project's vocabulary consistently.
+- Keep functions cohesive, control flow shallow, side effects explicit, and each passage at one abstraction level. Judge size by local reasoning cost, not fixed line, parameter, or class counts.
+- Use comments for invariants, external constraints, compatibility reasons, security decisions, and non-obvious trade-offs; keep mechanics in the code and comments current.
 - Introduce an abstraction only for a demonstrated seam; keep business logic independent from concrete infrastructure when that seam exists.
-- Before implementing common functionality or adding a package, inspect the capabilities, documentation, and types of dependencies already used by the project. Reuse a maintained dependency when it reduces total complexity.
+- Before implementing common functionality or adding a package, inspect the capabilities, documentation, and types of dependencies already used by the project. Reuse a maintained dependency when it reduces total complexity. Add a narrower third-party boundary only when it constrains capability, stabilizes domain semantics, or translates failures; settle uncertain behavior with a minimal learning or contract test.
 - Match repository conventions and avoid hidden mutation.
+
+## Tests and Refactoring
+
+- Keep tests readable, deterministic, independent, and focused on observable behavior. Group assertions by one behavior and failure reason instead of enforcing an assertion count.
+- Before behavior-preserving refactoring where current behavior is unclear or uncovered, capture it with focused characterization tests. Make one explainable transformation at a time and run the relevant checks after each step.
+
+## Concurrent Code
+
+- In concurrent code, minimize shared mutable state, name its owner, use maintained concurrency primitives, and define cancellation, shutdown, timeout, and failure behavior.
 
 ## Plan and Verify
 
