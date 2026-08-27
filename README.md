@@ -18,19 +18,37 @@ Always edit the appropriate `AGENTS.md`. The matching `CLAUDE.md` resolves to th
 
 | Global path | Repository target |
 | --- | --- |
+| `$HOME/.codex/AGENTS.md` | `global/AGENTS.md` |
+| `$HOME/.claude/CLAUDE.md` | `global/CLAUDE.md` |
+| `$HOME/.codex/rules/*.md` | `global/rules/*.md` |
+| `$HOME/.claude/rules/*.md` | `global/rules/*.md` |
 | `%USERPROFILE%\.codex\AGENTS.md` | `global/AGENTS.md` |
 | `%USERPROFILE%\.claude\CLAUDE.md` | `global/CLAUDE.md` |
 | `%USERPROFILE%\.codex\rules\*.md` | `global/rules/*.md` |
 | `%USERPROFILE%\.claude\rules\*.md` | `global/rules/*.md` |
 
-Install or refresh the global links from PowerShell:
+On Linux, install or refresh the global links with Bash:
+
+```bash
+./scripts/install-links.sh
+```
+
+Validate repository symbolic links, global links, and local Markdown link targets with:
+
+```bash
+./scripts/validate-links.sh
+```
+
+On Windows, use PowerShell:
 
 ```powershell
 .\scripts\install-links.ps1
 ```
 
-Existing global files are copied to `%USERPROFILE%\.agentmd-backups\<timestamp>` before replacement. Validate repository symbolic links, global links, and local Markdown link targets with:
+Validate with:
 
 ```powershell
 .\scripts\validate-links.ps1
 ```
+
+Existing global files are copied to `$HOME/.agentmd-backups/<timestamp>` on Linux or `%USERPROFILE%\.agentmd-backups\<timestamp>` on Windows before replacement.

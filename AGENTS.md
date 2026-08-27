@@ -15,5 +15,5 @@ This repository is the single source of truth for global Codex and Claude Code i
 
 1. Update the appropriate `AGENTS.md` file.
 2. Confirm both `CLAUDE.md` links still resolve to their same-directory `AGENTS.md` targets.
-3. Run `scripts/validate-links.ps1` before committing.
+3. Run the platform-native link validator before committing: `scripts/validate-links.sh` on Linux or `scripts/validate-links.ps1` on Windows.
 4. Follow `global/rules/git-delivery.md` for Git delivery.
