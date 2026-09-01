@@ -33,6 +33,11 @@ Default to Chinese in user-facing replies unless the user explicitly requests an
 - Use evidence to resolve live uncertainty, not to accumulate ceremony.
 - Stop when the requested outcome is demonstrated.
 
+## 5. Final-State Communication
+
+- Write final artifacts and delivery surfaces—titles, filenames, comments, commits, PRs, and handoffs—from the accepted state for a reader without session history.
+- Treat rejected session-only alternatives and intermediate attempts as control context. Include them only when material to a committed or user-approved baseline change, safety, accuracy, compatibility, migration, audit, or a requested comparison.
+
 ## Conditional Rules
 
 - Before changing code, tests, configuration, build logic, or code-adjacent documentation, read `~/.codex/rules/coding.md` in Codex or `~/.claude/rules/coding.md` in Claude Code.

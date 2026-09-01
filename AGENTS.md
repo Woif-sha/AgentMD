@@ -16,6 +16,11 @@ This repository is the single source of truth for global Codex and Claude Code i
 - Work, commit, and finish every task on `server`.
 - Treat `main` as a read-only baseline. Merge `server` into `main` only when the user explicitly requests it.
 
+## Merge Policy
+
+- When merging `main` into `server`, resolve conflicting files with `main`'s complete version.
+- If a conflict concerns server-versus-computer environment differences, stop before resolving and ask the user which version to keep.
+
 ## Change Workflow
 
 1. Update the appropriate `AGENTS.md` file.
