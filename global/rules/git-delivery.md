@@ -4,6 +4,8 @@
 
 Treat one completed, validated, independently reversible change set as the commit boundary; a file save or unfinished experiment is not a commit boundary. The user grants standing authorization to commit and push completed coding work without asking again.
 
+Base commit, PR, and handoff claims on the task-owned final diff and read-back state.
+
 After every code, test, asset, configuration, or code-adjacent documentation change:
 
 1. Inspect the final diff and working tree. Stage only files that belong to the current task; preserve unrelated user changes and keep generated or ignored artifacts out of Git.
