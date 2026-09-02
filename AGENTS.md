@@ -18,7 +18,7 @@ This repository is the single source of truth for global Codex and Claude Code i
 
 ## Change Workflow
 
-1. When an external repository enters consideration, add or update its row in the `Source provenance` ledger in `README.md` with the reviewed revision, current status, influence, and available research records.
+1. When an external repository enters consideration, add or update its row in the `Source provenance` ledger in `README.md` with the reviewed revision, current status, influence, and integrating AgentMD commit. Keep the `AgentMD record` column limited to integrating commits; research notes remain local workspace state and are not referenced by tracked content.
 2. Update the appropriate `AGENTS.md` file.
 3. Confirm both `CLAUDE.md` links still resolve to their same-directory `AGENTS.md` targets.
 4. Run `scripts/validate-links.ps1` before committing.
