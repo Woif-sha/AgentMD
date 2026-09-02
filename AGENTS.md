@@ -11,6 +11,11 @@ This repository is the single source of truth for global Codex and Claude Code i
 - `CLAUDE.md` files are symbolic links to the `AGENTS.md` file in the same directory. Keep one authoritative file per layer and never duplicate their contents.
 - Keep supporting global rules under `global/rules/` so relative references from `global/AGENTS.md` remain self-contained.
 
+## Repository Research
+
+- When studying an external repository, save the findings to `research/<repository-name>.md` before reporting completion.
+- Treat `research/` as local workspace state: list `/research/` in `.git/info/exclude` and keep its files outside Git delivery.
+
 ## Change Workflow
 
 1. When an external repository enters consideration, add or update its row in the `Source provenance` ledger in `README.md` with the reviewed revision, current status, influence, and available research records.
