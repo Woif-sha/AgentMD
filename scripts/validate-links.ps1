@@ -100,9 +100,6 @@ function Assert-InstalledFile {
 $authoritativeFile = Join-Path $RepositoryRoot 'global\AGENTS.md'
 $authoritativeContent = [System.IO.File]::ReadAllText($authoritativeFile)
 $authoritativeBlock = Get-ManagedBlock -Content $authoritativeContent -Source $authoritativeFile
-$projectInstructionFile = Join-Path $RepositoryRoot 'AGENTS.md'
-$projectInstructionContent = [System.IO.File]::ReadAllText($projectInstructionFile)
-$null = Get-ManagedBlock -Content $projectInstructionContent -Source $projectInstructionFile
 
 Assert-RepositoryLink `
     -Link (Join-Path $RepositoryRoot 'CLAUDE.md') `

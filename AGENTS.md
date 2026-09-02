@@ -1,4 +1,3 @@
-<!-- AGENTMD_START -->
 # AgentMD Project Rules
 
 ## Purpose
@@ -14,8 +13,7 @@ This repository is the single source of truth for global Codex and Claude Code i
 
 ## Installed Instruction Ownership
 
-- The content between `AGENTMD_START` and `AGENTMD_END` in each tracked `AGENTS.md` is managed by AgentMD.
-- The managed block in `global/AGENTS.md` is the payload synchronized to user-level instruction files.
+- The content between `AGENTMD_START` and `AGENTMD_END` in `global/AGENTS.md` is the payload synchronized to user-level instruction files.
 - A user-level instruction file that still links to this repository is exclusively managed by AgentMD.
 - A user-level instruction file that has become a regular file is shared. Update only its AgentMD-managed payload and preserve all content outside the markers.
 - Stop without overwriting when a shared instruction file has missing, duplicated, or out-of-order markers, or when a symbolic link points somewhere unexpected.
@@ -39,4 +37,3 @@ This repository is the single source of truth for global Codex and Claude Code i
 3. Run `scripts/install-links.ps1` to install or synchronize the user-level files without taking over shared instruction content.
 4. Run `scripts/validate-links.ps1`, which must accept both current AgentMD links and current managed copies while continuing to require the repository's own `CLAUDE.md` links.
 5. Follow `global/rules/git-delivery.md` for Git delivery. When upstream ideas change tracked AgentMD instructions, commit the integration first, then immediately record that exact commit in the ledger and deliver the provenance update before reporting completion.
-<!-- AGENTMD_END -->

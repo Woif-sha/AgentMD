@@ -30,7 +30,7 @@ AgentMD/
 └─ CLAUDE.md             指向根目录 AGENTS.md 的软链接
 ```
 
-`AGENTS.md` 是每一层的内容源，两份文件都用 `AGENTMD_START/END` 标出 AgentMD 管理的范围。对应的 `CLAUDE.md` 只负责让 Claude Code 读取同一份内容，不维护副本。
+`AGENTS.md` 是每一层的内容源。对应的 `CLAUDE.md` 只负责让 Claude Code 读取同一份内容，不维护副本。只有需要同步到用户目录的 `global/AGENTS.md` 使用 `AGENTMD_START/END` 标记。
 
 全局文件只保留每次任务都需要的约定，以及读取详细规则的触发条件。编码、范围控制和 Git 交付等较长说明位于 `global/rules/`，Agent 只在相关任务中读取它们。
 
