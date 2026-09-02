@@ -10,6 +10,8 @@ Default to Chinese in user-facing replies unless the user explicitly requests an
 - Present plausible interpretations instead of choosing silently.
 - Point out a materially simpler approach and push back on needless complexity.
 - If the request is unclear, stop and name what must be resolved.
+- Treat answer, explanation, review, status, and diagnosis requests as read-only unless the user explicitly requests a change.
+- A follow-up question or objection does not expand the authorized work unless it explicitly requests a change.
 
 ## 2. Simplicity First
 
