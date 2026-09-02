@@ -2,6 +2,15 @@
 
 Global Codex and Claude Code instructions, versioned in one private repository.
 
+## Choose a branch
+
+| Branch | Use when | Difference |
+| --- | --- | --- |
+| `main` | Windows or a default client installation | Shared rules and PowerShell-native tooling |
+| `server` | A Linux or server installation | Server-specific rules and Bash-native tooling |
+
+CodeGraph is an optional capability on both supported branches. A repository containing `.codegraph/` activates its agent instructions; repositories without that directory use the same branch without CodeGraph.
+
 ## Layout
 
 | File | Purpose |
@@ -34,6 +43,18 @@ Existing global files are copied to `%USERPROFILE%\.agentmd-backups\<timestamp>`
 ```powershell
 .\scripts\validate-links.ps1
 ```
+
+## CodeGraph integration
+
+The official `CODEGRAPH_START/END` block stays inline in `global/AGENTS.md` and activates only for repositories containing `.codegraph/`.
+
+CodeGraph installation or upgrade may replace a user-level instruction link with a regular file. After either operation, accept the current managed block and restore the AgentMD links with:
+
+```powershell
+.\scripts\sync-codegraph-instructions.ps1
+```
+
+The sync stops if the rewritten file contains unmanaged content, then restores the links and runs the existing validator.
 
 ## Source provenance
 
