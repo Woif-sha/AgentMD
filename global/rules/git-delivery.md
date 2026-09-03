@@ -2,7 +2,7 @@
 
 ## Completed Change Delivery
 
-Treat one completed, validated, independently reversible change set as the commit boundary; a file save or unfinished experiment is not a commit boundary. The user grants standing authorization to commit and push completed coding work without asking again.
+Treat one completed, validated, independently reversible change set as the commit boundary; a file save or unfinished experiment is not a commit boundary. The user grants standing authorization to commit completed coding work locally without asking again.
 
 Base commit, PR, and handoff claims on the task-owned final diff and read-back state.
 
@@ -11,10 +11,11 @@ After every code, test, asset, configuration, or code-adjacent documentation cha
 1. Inspect the final diff and working tree. Stage only files that belong to the current task; preserve unrelated user changes and keep generated or ignored artifacts out of Git.
 2. Run validation proportional to the change and any repository-required checks. A completed implementation with failing required checks is not ready to deliver.
 3. Create a local commit with a terse message that identifies the outcome or root cause. Do not leave completed work uncommitted.
-4. If an accessible GitHub remote exists, fetch before pushing, confirm the remote branch has not diverged, and push the current branch with upstream tracking when needed. Never force-push or rewrite published history. If authentication, network access, branch protection, divergence, or the absence of a GitHub remote prevents a safe push, keep the local commit and report the exact blocker.
-5. Confirm the local commit, remote branch, and clean working-tree state before reporting completion.
+4. Confirm the local commit and working-tree state before reporting completion.
 
 Follow repository-specific branch and release conventions when present. After delivering work, leave the checkout on the repository's designated development branch when one exists.
+
+Push only when the user explicitly requests it in the current task. Before pushing, fetch and confirm that the target branch has not diverged; never force-push or rewrite published history. If a safe push is blocked, keep the local commit and report the blocker.
 
 ## GitHub CLI PR Delivery
 
@@ -30,7 +31,7 @@ Preserve required checks and branch protections throughout this path; never forc
 
 ## Version Releases
 
-Create a Git tag or GitHub Release only when the user explicitly requests a release or version publication; ordinary commits and pushes never imply a release.
+Create a Git tag or GitHub Release only when the user explicitly requests a release or version publication; that request authorizes the pushes required by the release workflow. Ordinary commits and pushes never imply a release.
 
 ### Release Records
 
