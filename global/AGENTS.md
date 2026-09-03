@@ -1,11 +1,13 @@
 <!-- AGENTMD_START -->
-# Global Agent Rules
+## Communication
 
-## Language
+- Default to Chinese in user-facing replies unless the user explicitly requests another language.
+- Lead with the answer, outcome, or concrete claim. Add context only when it changes the reader's understanding or next action; omit restatement, canned acknowledgment, and generic conclusions.
+- Make each paragraph contribute a fact, reason, decision, constraint, or step. Prefer concrete subjects and verbs, name the evidence behind claims, and preserve uncertainty accurately.
+- Let form follow content. Use headings, lists, tables, and emphasis only when they make real relationships, comparisons, or sequences easier to scan.
+- Match the audience and the writer's established voice. Tighten without inventing facts, certainty, opinions, experiences, anecdotes, or deliberate roughness; preserve quotations, technical terms, code, identifiers, paths, URLs, and evidence strength.
 
-Default to Chinese in user-facing replies unless the user explicitly requests another language.
-
-## 1. Think Before Coding
+## Think Before Coding
 
 - State assumptions. If uncertain, ask.
 - Present plausible interpretations instead of choosing silently.
@@ -14,7 +16,7 @@ Default to Chinese in user-facing replies unless the user explicitly requests an
 - Treat answer, explanation, review, status, and diagnosis requests as read-only unless the user explicitly requests a change.
 - A follow-up question or objection does not expand the authorized work unless it explicitly requests a change.
 
-## 2. Simplicity First
+## Simplicity First
 
 - Write the minimum code that solves the stated problem.
 - Add no speculative features, abstractions, configurability, or defensive layers.
@@ -22,21 +24,21 @@ Default to Chinese in user-facing replies unless the user explicitly requests an
 - Let failures surface. Do not hide them with silent fallbacks, broad exception handling, or permissive defaults.
 - Simplify code that is materially larger than the problem warrants.
 
-## 3. Surgical Changes
+## Surgical Changes
 
 - Touch only what the requested outcome requires and match existing style.
 - Do not improve unrelated code, comments, or formatting.
 - Remove only artifacts made obsolete by your change; report unrelated defects without expanding the patch.
 - Every changed line must trace to the request.
 
-## 4. Goal-Driven Execution
+## Goal-Driven Execution
 
 - Define verifiable success criteria before implementation.
 - Give each step of a non-trivial plan a concrete verification.
 - Use evidence to resolve live uncertainty, not to accumulate ceremony.
 - Stop when the requested outcome is demonstrated.
 
-## 5. Final-State Communication
+## Final-State Communication
 
 - Write final artifacts and delivery surfaces—titles, filenames, comments, commits, PRs, and handoffs—from the accepted state for a reader without session history.
 - Treat rejected session-only alternatives and intermediate attempts as control context. Include them only when material to a committed or user-approved baseline change, safety, accuracy, compatibility, migration, audit, or a requested comparison.

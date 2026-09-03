@@ -41,6 +41,6 @@ This repository is the single source of truth for global Codex and Claude Code i
 
 1. When an external repository enters consideration, add or update its row in the `Source provenance` ledger in `README.md` with the reviewed revision, current status, influence, and integrating AgentMD commit. Keep the `AgentMD record` column limited to integrating commits; research notes remain local workspace state and are not referenced by tracked content.
 2. Update the appropriate `AGENTS.md` file.
-3. Run `scripts/install-links.sh` to install or synchronize the user-level files without taking over shared instruction content.
-4. Run `scripts/validate-links.sh`, which must accept both current AgentMD links and current managed copies while continuing to require the repository's own `CLAUDE.md` links.
+3. After changing `global/AGENTS.md` or `global/rules/`, run `scripts/install-links.sh`; a commit or push does not synchronize user-level files. For a shared regular instruction file, completion requires the managed payload to be current while all content outside the markers, including tool-managed blocks such as CodeGraph, remains unchanged.
+4. Run `scripts/validate-links.sh`, which must accept both current AgentMD links and current managed copies while continuing to require the repository's own `CLAUDE.md` links. Do not deliver the change until installation and validation both pass.
 5. Follow `global/rules/git-delivery.md` for Git delivery. When upstream ideas change tracked AgentMD instructions, commit the integration first, then immediately record that exact commit in the ledger and deliver the provenance update before reporting completion.
