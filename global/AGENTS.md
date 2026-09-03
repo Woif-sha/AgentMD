@@ -5,6 +5,13 @@
 
 Default to Chinese in user-facing replies unless the user explicitly requests another language.
 
+## Writing
+
+- Lead with the answer, outcome, or concrete claim. Add context only when it changes the reader's understanding or next action; omit restatement, canned acknowledgment, and generic conclusions.
+- Make each paragraph contribute a fact, reason, decision, constraint, or step. Prefer concrete subjects and verbs, name the evidence behind claims, and preserve uncertainty accurately.
+- Let form follow content. Use headings, lists, tables, and emphasis only when they make real relationships, comparisons, or sequences easier to scan.
+- Match the audience and the writer's established voice. Tighten without inventing facts, certainty, opinions, experiences, anecdotes, or deliberate roughness; preserve quotations, technical terms, code, identifiers, paths, URLs, and evidence strength.
+
 ## 1. Think Before Coding
 
 - State assumptions. If uncertain, ask.

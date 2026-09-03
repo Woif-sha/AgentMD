@@ -7,8 +7,6 @@ param(
 $ErrorActionPreference = 'Stop'
 $startMarker = '<!-- AGENTMD_START -->'
 $endMarker = '<!-- AGENTMD_END -->'
-$timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$backupRoot = Join-Path $UserProfilePath ".agentmd-backups\$timestamp"
 
 function Get-ManagedBlock {
     param(
@@ -41,17 +39,6 @@ function Get-LinkTarget {
         return [System.IO.Path]::GetFullPath($rawTarget)
     }
     return [System.IO.Path]::GetFullPath((Join-Path (Split-Path -Parent $Link) $rawTarget))
-}
-
-function Backup-File {
-    param([string]$File)
-
-    $relativePath = [System.IO.Path]::GetRelativePath($UserProfilePath, $File)
-    $backupPath = Join-Path $backupRoot $relativePath
-    $backupParent = Split-Path -Parent $backupPath
-    New-Item -ItemType Directory -Path $backupParent -Force | Out-Null
-    Copy-Item -LiteralPath $File -Destination $backupPath -Force
-    Write-Host "Backed up: $File -> $backupPath"
 }
 
 $authoritativeFile = Join-Path $RepositoryRoot 'global\AGENTS.md'
@@ -110,12 +97,7 @@ foreach ($entry in $entries) {
 
     if ($entry.Kind -eq 'Instruction') {
         $content = [System.IO.File]::ReadAllText($link)
-        try {
-            $managed = Get-ManagedBlock -Content $content -Source $link
-        } catch {
-            Backup-File -File $link
-            throw
-        }
+        $managed = Get-ManagedBlock -Content $content -Source $link
         $action = if ($managed.Block -eq $authoritativeBlock.Block) { 'UnchangedCopy' } else { 'UpdateManagedBlock' }
         $operations += [pscustomobject]@{ Action = $action; Kind = $entry.Kind; Link = $link; Target = $target }
         continue
@@ -141,12 +123,10 @@ foreach ($operation in $operations) {
             $content = [System.IO.File]::ReadAllText($operation.Link)
             $managed = Get-ManagedBlock -Content $content -Source $operation.Link
             $updated = $content.Remove($managed.Start, $managed.Length).Insert($managed.Start, $authoritativeBlock.Block)
-            Backup-File -File $operation.Link
             [System.IO.File]::WriteAllText($operation.Link, $updated, [System.Text.UTF8Encoding]::new($false))
             Write-Host "Updated managed block: $($operation.Link)"
         }
         'UpdateRuleCopy' {
-            Backup-File -File $operation.Link
             Copy-Item -LiteralPath $operation.Target -Destination $operation.Link -Force
             Write-Host "Updated managed rule copy: $($operation.Link)"
         }

@@ -67,15 +67,11 @@ AgentMD/
 <!-- AGENTMD_END -->
 ```
 
-标记之外的文字会保留下来，文件也继续保持普通文件，不会被转回软链接。写入前的副本保存在：
+标记之外的文字会保留下来，文件也继续保持普通文件，不会被转回软链接。
 
-```text
-%USERPROFILE%\.agentmd-backups\<timestamp>\
-```
+如果普通文件没有完整标记、标记重复或顺序错误，脚本会停止。指向未知位置的软链接也不会被接管。这些情况需要先由用户确认文件的实际归属。
 
-如果普通文件没有完整标记、标记重复或顺序错误，脚本会先保存诊断副本，然后停止。指向未知位置的软链接也不会被接管。这些情况需要先由用户确认文件的实际归属。
-
-`rules/*.md` 的文件名和完整内容由 AgentMD 管理。它们如果变成普通文件，同步脚本会备份并更新内容，但仍保留普通文件形态。
+`rules/*.md` 的文件名和完整内容由 AgentMD 管理。它们如果变成普通文件，同步脚本会原位更新内容，但仍保留普通文件形态。
 
 ## 更新与验证
 
@@ -84,6 +80,8 @@ AgentMD/
 ```powershell
 .\scripts\install-links.ps1
 ```
+
+提交或推送只会更新仓库，不会更新用户目录。每台电脑拉取变更后都要运行安装脚本；普通用户级指令文件只更新 AgentMD 标记内的内容，CodeGraph 等标记外内容保持不变。
 
 随后验证仓库链接、用户目录中的链接或托管副本，以及 Markdown 内的本地路径：
 
@@ -112,5 +110,6 @@ AgentMD 会阅读其他仓库中的规则，但只吸收适合本项目的部分
 | [`multica-ai/andrej-karpathy-skills`](https://github.com/multica-ai/andrej-karpathy-skills)（原 `forrestchang/andrej-karpathy-skills`） | [`2c60614`](https://github.com/multica-ai/andrej-karpathy-skills/commit/2c606141936f1eeef17fa3043a72095b4765b9c2) | 调整后采用 | 引入先思考、保持简单、限制改动范围和按目标验证四项原则 | [`b7e2d8c`](https://github.com/Woif-sha/AgentMD/commit/b7e2d8c0eb928b9e84e5ced95d5b5f24154a7492) |
 | [`LB623/no-negative-echo`](https://github.com/LB623/no-negative-echo) | [`eba9f1d`](https://github.com/LB623/no-negative-echo/commit/eba9f1d2b4c19e699786a49427189988ad6d8d65) | 调整后采用 | 要求制品、提交、PR 和交接说明只描述最终接受的状态 | [`9f422e8`](https://github.com/Woif-sha/AgentMD/commit/9f422e8b5fe83b89773401cc1d0bcb808f1906e0) |
 | [`lennney/stop-that-shit`](https://github.com/lennney/stop-that-shit) | [`68f4a7a`](https://github.com/lennney/stop-that-shit/commit/68f4a7a1303b00a8f8319eb33ff1ca84eb0ad3cc) | 调整后采用 | 明确回答、解释、审查、状态报告和诊断请求默认只读 | [`d56b7e1`](https://github.com/Woif-sha/AgentMD/commit/d56b7e1965afb60c0b7f05c5045afe9a663099fa) |
+| [`conorbronsdon/avoid-ai-writing`](https://github.com/conorbronsdon/avoid-ai-writing) | [`58a95fc`](https://github.com/conorbronsdon/avoid-ai-writing/commit/58a95fc9971d7af95f1f1324b8a6bc991eb8004d) | 调整后采用 | 引入结论先行、信息密度、按内容组织和保留作者事实与声音边界的写作规则 | — |
 
 只有在仓库证据能够确认来源时才登记。新的上游仓库进入考虑范围后，先记录审阅 revision；建议真正进入规则时，再补充对应的 AgentMD 提交。
