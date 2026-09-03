@@ -5,6 +5,12 @@
 
 Default to Chinese in user-facing replies unless the user explicitly requests another language.
 
+## Writing
+
+- Lead with the answer, outcome, or concrete claim. Remove throat-clearing, repeated restatement, vague attribution, promotional inflation, and generic conclusions that do not change the reader's understanding or next action.
+- Make each paragraph contribute a fact, claim, decision, or step. Use headings and lists only when they make genuine structure easier to scan, and let rhythm follow the content rather than a formula.
+- Match the audience and the writer's established voice. Tighten and clarify without inventing facts, certainty, opinions, first-person experience, anecdotes, or deliberate roughness; preserve quotations, code, tables, identifiers, paths, URLs, and the strength of evidence.
+
 ## 1. Think Before Coding
 
 - State assumptions. If uncertain, ask.
