@@ -39,6 +39,7 @@ For non-trivial work, state the cause, affected area, local-versus-structural ch
 
 - For multi-step builds, establish the smallest working end-to-end slice, then add capabilities without breaking it.
 - Run repository-required checks.
+- Verify claims that affect the conclusion or next action against authoritative code, active configuration, or execution paths; claim only what the evidence establishes.
 - Use optional checks only to settle a live uncertainty or identify an affected consumer.
 - Review the diff for symptom patches, duplication, hidden fallbacks, second sources of truth, obsolete code created by the change, unrequested behavior, weak evidence, and security regressions.
 - Stop when success criteria are met with sufficient evidence.
