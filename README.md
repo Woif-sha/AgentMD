@@ -25,7 +25,8 @@ AgentMD/
 │  └─ rules/             按条件读取的详细规则
 ├─ scripts/
 │  ├─ install-links.ps1  首次安装与后续同步
-│  └─ validate-links.ps1 检查安装状态和文档链接
+│  ├─ validate-links.ps1 检查安装状态和文档链接
+│  └─ validate-isolated-links.ps1 在临时用户目录中验证并自动清理
 ├─ AGENTS.md             维护本仓库时使用的规则
 └─ CLAUDE.md             指向根目录 AGENTS.md 的软链接
 ```
@@ -88,6 +89,14 @@ AgentMD/
 ```powershell
 .\scripts\validate-links.ps1
 ```
+
+需要在隔离的临时用户目录中验证安装时，使用专用入口：
+
+```powershell
+.\scripts\validate-isolated-links.ps1
+```
+
+这个入口会在 `%TEMP%` 下复制一份规则源，让测试链接只指向临时副本，运行安装和验证后再在成功或失败时删除整个临时目录。即使验证进程被意外终止，残留链接也不会指向仓库里的真实规则源文件。
 
 验证输出会区分 `linked` 和 `managed copy`。前者是软链接，后者是保留在用户目录中的普通文件。
 
