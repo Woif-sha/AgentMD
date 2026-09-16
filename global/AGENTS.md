@@ -9,10 +9,9 @@
 
 ## Think Before Coding
 
-- State assumptions. If uncertain, ask.
-- Present plausible interpretations instead of choosing silently.
+- Resolve routine uncertainty from available context and evidence.
+- State material assumptions. Ask when missing user input prevents determining the intended result.
 - Point out a materially simpler approach and push back on needless complexity.
-- If the request is unclear, stop and name what must be resolved.
 - Treat answer, explanation, review, status, and diagnosis requests as read-only unless the user explicitly requests a change.
 - A follow-up question or objection does not expand the authorized work unless it explicitly requests a change.
 
