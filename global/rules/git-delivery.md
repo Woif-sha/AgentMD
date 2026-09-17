@@ -8,42 +8,30 @@ Base commit, PR, and handoff claims on the task-owned final diff and read-back s
 
 After every code, test, asset, configuration, or code-adjacent documentation change:
 
-1. Inspect the final diff and working tree. Stage only files that belong to the current task; preserve unrelated user changes and keep generated or ignored artifacts out of Git.
+1. Inspect the final diff and working tree. Preserve unrelated user changes and keep generated or ignored artifacts out of Git.
 2. Run validation proportional to the change and any repository-required checks. A completed implementation with failing required checks is not ready to deliver.
-3. Create a local commit with a terse message that identifies the outcome or root cause. Do not leave completed work uncommitted.
-4. Confirm the local commit and working-tree state before reporting completion.
+3. Before each task commit, run `git pull --no-rebase --ff`. Preserve uncommitted work and existing commits; report policies requiring rebase or squash instead of applying them. Resolve conflicts by inspecting both sides and preserving their intended behavior; ask when intent is ambiguous. Finish any merge, review the final diff, and rerun affected checks before committing.
+4. Stage only files that belong to the current task, then create a local commit with a terse message that identifies the outcome or root cause. Do not leave completed work uncommitted.
+5. Confirm the local commit and working-tree state before reporting completion.
 
 Follow repository-specific branch and release conventions when present. After delivering work, leave the checkout on the repository's designated development branch when one exists.
 
-Push only when the user explicitly requests it in the current task. Before pushing, fetch and confirm that the target branch has not diverged; never force-push or rewrite published history. If a safe push is blocked, keep the local commit and report the blocker.
+Ordinary delivery ends after verifying the local commit and working-tree state. The user pushes branches for all workflows; do not push directly or through another tool. If a PR or release needs commits not yet on the remote, report what is ready and wait for the user to push.
 
 ## GitHub CLI PR Delivery
 
 Use the locally authenticated GitHub CLI as the primary client for PR creation, inspection, and merge. The GitHub App may provide read-only context, but do not probe its write permissions before using the verified CLI path.
 
+PR inspection is read-only. A request to create a PR does not authorize merging it.
+
 1. Run `gh auth status` and confirm the CLI is authenticated as the intended user with access to the repository and the scopes required for the operation.
-2. Create the PR with `gh pr create` and the requested draft or ready state.
-3. Before merging, use `gh pr view` and the repository's required check commands to confirm the PR is mergeable and every required check has passed or no checks apply.
-4. Merge with `gh pr merge` using the repository's required merge strategy.
+2. When creation is requested, confirm the intended commits are on the remote branch, then use `gh pr create` with the requested draft or ready state.
+3. Only when merging is explicitly requested, use `gh pr view` and the repository's required check commands to confirm the PR is mergeable and every required check has passed or no checks apply.
+4. Merge with `gh pr merge --merge`.
 5. Verify the PR is `MERGED`, confirm any issue named by `Closes` was closed, and synchronize the local default branch with the remote.
 
 Preserve required checks and branch protections throughout this path; never force-push or bypass them.
 
 ## Version Releases
 
-Create a Git tag or GitHub Release only when the user explicitly requests a release or version publication; that request authorizes the pushes required by the release workflow. Ordinary commits and pushes never imply a release.
-
-### Release Records
-
-- Write changelog entries and Release notes in Chinese; retain original spelling only for code identifiers, filenames, commands, and proper names.
-- Keep `CHANGELOG.md` under `## 未发布` and dated `## X.Y.Z - YYYY-MM-DD` sections. Under each, use the nonempty categories `### 新增`, `### 调整`, `### 修复`, `### 安全`, and `### 工程` in that order. Move shipped entries from `未发布` into the version section without duplication.
-- Generate Release notes from that version's changelog with this hierarchy: `# [**vX.Y.Z**](release URL)`, `## 更新内容`, the existing `###` change categories, `## 安装与更新`, `## 发布校验`, and `## 完整记录`.
-- Describe observable changes rather than commits or implementation chronology. State only checks actually completed; never present pending or unrun validation as passed.
-
-### GitHub Actions Delivery
-
-1. Resolve the requested semantic-version increment. By default, treat “小版本” as a patch increment (`Z` in `X.Y.Z`); treat “次版本/minor” as `Y`, and “主版本/major” as `X`.
-2. Update every authoritative version file and the changelog on the designated development branch, then run the repository's complete release checks and build the distributable artifact.
-3. Commit and push the release metadata, wait for required CI, promote the validated development branch to the release/default branch using the repository's required merge strategy, and push that branch.
-4. From the release branch, dispatch the repository's GitHub Actions release workflow with `X.Y.Z`. The workflow is the sole publisher: it creates the immutable `vX.Y.Z` tag, a same-titled Release, and only matching version artifacts. Never create a version tag or Release locally or manually; if the workflow is unavailable, stop and report the blocker.
-5. Wait for the workflow, then verify its conclusion, Release tag and title, artifact identity and version, and remote branch/tag alignment. Establish asset identity by matching Release metadata digests to locally inspected deterministic artifacts; download only when metadata cannot settle it. Existing versions are immutable: a rerun must not move the tag or replace an asset with different bytes.
+When the user requests a version release, read [release.md](release.md) before preparing it.

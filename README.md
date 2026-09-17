@@ -106,9 +106,9 @@ $HOME/.agentmd-backups/<timestamp>/
 
 ## 规则来源
 
-AgentMD 会阅读其他仓库中的规则，但只吸收适合本项目的部分。表格固定被审阅的 revision，并记录真正把建议写入 AgentMD 的提交。研究笔记保存在本地 `research/` 目录，不进入 Git，也不从 README 链接。
+AgentMD 从上游仓库和官方文档中吸收适用的规则。表格固定仓库的审阅 revision，记录文档的查阅日期，以及实际整合建议的 AgentMD 提交。研究笔记保存在本地 `research/` 目录，不进入 Git，也不从 README 链接。
 
-| 上游仓库 | 审阅 revision | 状态 | 对 AgentMD 的影响 | AgentMD 提交 |
+| 来源 | 审阅版本 | 状态 | 对 AgentMD 的影响 | AgentMD 提交 |
 | --- | --- | --- | --- | --- |
 | [`lili-luo/aicoding-cookbook`](https://github.com/lili-luo/aicoding-cookbook) | [`beb8270`](https://github.com/lili-luo/aicoding-cookbook/commit/beb82701534bc4043fc0f136a3622cbc24547409) | 初始采用，后续整理并复审 | 形成可观察失败、根因修复、结构性工作、有限计划和 Agent 执行规则的初稿；要求关键结论回查权威实现，声明不超出证据能力 | [`f72b8db`](https://github.com/Woif-sha/AgentMD/commit/f72b8dbbe81054530dfec8e68fef11707176aa32)、[`cb36920`](https://github.com/Woif-sha/AgentMD/commit/cb36920dabf1158e5d5e74e89a043de65c8da085) |
 | [`multica-ai/andrej-karpathy-skills`](https://github.com/multica-ai/andrej-karpathy-skills)（原 `forrestchang/andrej-karpathy-skills`） | [`2c60614`](https://github.com/multica-ai/andrej-karpathy-skills/commit/2c606141936f1eeef17fa3043a72095b4765b9c2) | 调整后采用 | 引入先思考、保持简单、限制改动范围和按目标验证四项原则 | [`b7e2d8c`](https://github.com/Woif-sha/AgentMD/commit/b7e2d8c0eb928b9e84e5ced95d5b5f24154a7492) |
@@ -116,5 +116,8 @@ AgentMD 会阅读其他仓库中的规则，但只吸收适合本项目的部分
 | [`lennney/stop-that-shit`](https://github.com/lennney/stop-that-shit) | [`d4b9db7`](https://github.com/lennney/stop-that-shit/commit/d4b9db78063d595e65b0c163933a90c4c681d50d) | 调整后采用，已复审 | 明确回答、解释、审查、状态报告和诊断请求默认只读 | [`d56b7e1`](https://github.com/Woif-sha/AgentMD/commit/d56b7e1965afb60c0b7f05c5045afe9a663099fa) |
 | [`colbymchenry/codegraph`](https://github.com/colbymchenry/codegraph) | [`b9ca4b7`](https://github.com/colbymchenry/codegraph/commit/b9ca4b7981116909900368cc1686a1074cd4d4c1) | 作为可选能力集成 | 为 Codex 和 Claude 提供 MCP 代码图；AgentMD 通过托管区块与其用户级指令共存 | [`07468ea`](https://github.com/Woif-sha/AgentMD/commit/07468ea31d1b4a7fc1e15a7f0b5b0469e2c41b92) |
 | [`conorbronsdon/avoid-ai-writing`](https://github.com/conorbronsdon/avoid-ai-writing) | [`a465548`](https://github.com/conorbronsdon/avoid-ai-writing/commit/a465548fe813969dc7006c2e042efa305c09c96f) | 调整后采用，已复审 | 引入结论先行、信息密度、按内容组织、以事实承载强调和保留作者事实与声音边界的写作规则 | [`5339754`](https://github.com/Woif-sha/AgentMD/commit/533975453d7a81cf0494a9699c257c8766770b52)、[`285a5f3`](https://github.com/Woif-sha/AgentMD/commit/285a5f3d9f155816574ae6d2d473a0df40c2fa3e) |
+| [`cursor/plugins`](https://github.com/cursor/plugins) | [`c1c0a32`](https://github.com/cursor/plugins/commit/c1c0a32802223f4be824112dd83d33ad29a8b26c) | 调整后采用 | 要求精简时保留必要行动者和关系，并用实际机制、输入输出、失败条件、决策或测量结果约束项目文档和交接 | [`b1fae26`](https://github.com/Woif-sha/AgentMD/commit/b1fae26635dad9d83adde74e4d92195632e102b0) |
+| [OpenAI GPT-6 Astra 模型指南](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra) | 2026-09-16 查阅 | 调整后采用 | 先用上下文和证据解决普通不确定性，仅在缺少用户信息、无法确定预期结果时提问 | [`6919de2`](https://github.com/Woif-sha/AgentMD/commit/6919de2bc8b229eefa237b3267eb8d0ce3fba325) |
+| [Eric Provencher：Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra) | 2026-09-11 发布，2026-09-16 查阅 | 调整后采用 | 将版本发布流程独立为按需读取的规则，减少常规修改加载的无关指令 | [`6919de2`](https://github.com/Woif-sha/AgentMD/commit/6919de2bc8b229eefa237b3267eb8d0ce3fba325) |
 
-只有在仓库证据能够确认来源时才登记。新的上游仓库进入考虑范围后，先记录审阅 revision；建议真正进入规则时，再补充对应的 AgentMD 提交。
+只有一手证据能够确认来源时才登记。先记录审阅版本，建议进入规则后再补充实际整合的 AgentMD 提交。
