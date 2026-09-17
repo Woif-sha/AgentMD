@@ -1,7 +1,5 @@
 # Git Delivery
 
-Integrate histories with merge, preserving existing commits. Do not rebase or squash; report incompatible repository policies instead of changing strategies.
-
 ## Completed Change Delivery
 
 Treat one completed, validated, independently reversible change set as the commit boundary; a file save or unfinished experiment is not a commit boundary. The user grants standing authorization to commit completed coding work locally without asking again.
@@ -12,7 +10,7 @@ After every code, test, asset, configuration, or code-adjacent documentation cha
 
 1. Inspect the final diff and working tree. Preserve unrelated user changes and keep generated or ignored artifacts out of Git.
 2. Run validation proportional to the change and any repository-required checks. A completed implementation with failing required checks is not ready to deliver.
-3. Before each task commit, run `git pull --no-rebase --ff`, preserving uncommitted work. Resolve conflicts by inspecting both sides and preserving their intended behavior; ask when intent is ambiguous. Finish any merge, review the final diff, and rerun affected checks before committing.
+3. Before each task commit, run `git pull --no-rebase --ff`. Preserve uncommitted work and existing commits; report policies requiring rebase or squash instead of applying them. Resolve conflicts by inspecting both sides and preserving their intended behavior; ask when intent is ambiguous. Finish any merge, review the final diff, and rerun affected checks before committing.
 4. Stage only files that belong to the current task, then create a local commit with a terse message that identifies the outcome or root cause. Do not leave completed work uncommitted.
 5. Confirm the local commit and working-tree state before reporting completion.
 
